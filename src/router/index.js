@@ -17,5 +17,9 @@ export default new Router({
       path: '/editorz',
       component: () => import('@/components/Editorz'),
     },
+    {
+      path: '/geopattern',
+      component: () => import('@/components/Geopattern'),
+    },
   ]
 })

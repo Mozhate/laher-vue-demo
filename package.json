@@ -10,6 +10,7 @@
     "build": "node build/build.js"
   },
   "dependencies": {
+    "geopattern": "^1.2.3",
     "scriptjs": "^2.5.9",
     "trianglify": "^2.0.0",
     "vue": "^2.5.2",
