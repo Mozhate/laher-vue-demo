@@ -20,6 +20,10 @@ const router = new Router({
       component: () => import('@/components/Editorz'),
     },
     {
+      path: '/editorNew',
+      component: () => import('@/components/EditorNew'),
+    },
+    {
       path: '/mavonEditor',
       component: () => import('@/components/MavonEditor'),
     },
