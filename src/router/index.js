@@ -20,6 +20,18 @@ const router = new Router({
       component: () => import('@/components/Editorz'),
     },
     {
+      path: '/mavonEditor',
+      component: () => import('@/components/MavonEditor'),
+    },
+    {
+      path: '/vmMarkdown',
+      component: () => import('@/components/VmMarkdown'),
+    },
+    {
+      path: '/vueEditor',
+      component: () => import('@/components/VueEditor'),
+    },
+    {
       path: '/geopattern',
       component: () => import('@/components/Geopattern'),
     },

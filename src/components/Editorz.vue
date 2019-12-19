@@ -100,8 +100,9 @@
                     config.markdown = markdown
                 }
                 (async () => {
-                    await vm.fetchScript('https://cdn.bootcss.com/jquery/1.11.3/jquery.min.js')
-                    await vm.fetchScript('/static/editor.md/editormd.min.js')
+                    await vm.fetchScript('static/editor.md/jquery.min.js')
+                    await vm.fetchScript('static/editor.md/editormd.min.js')
+                    console.log(123)
                     vm.jsLoadOver = true
                     vm.editor = window.editormd(vm.editorId, config)
                     /*vm.$nextTick(() => {
