@@ -1,12 +1,22 @@
 <template>
   <div class="markdown-editor-box">
     <link rel="stylesheet" href="static/editor.md/css/editormd.min.css">
+    <link rel="stylesheet" href="static/editor.md/css/editormd.preview.css">
+    <button @click="htmlInfo()">html信息</button>
+    <button @click="textInfo()">文本信息</button>
     <div :id="editorId"></div>
+
+    <div style="background: #8f9d6a">内容：{{content}}</div>
+
+    <div id="view">
+
+    </div>
   </div>
 </template>
 <script>
     import scriptjs from 'scriptjs'
-    import { defaultConfig } from '../assets/editorz'
+    import {defaultConfig} from '../assets/editorz'
+
     export default {
         props: {
             editorId: {
@@ -29,6 +39,7 @@
         },
         data: function () {
             return {
+                content: null,
                 editor: null,
                 timer: null,
                 doc: {},
@@ -36,6 +47,30 @@
             }
         },
         methods: {
+            htmlInfo() {
+                this.content = this.editor.getHTML()
+            },
+            textInfo() {
+                this.content = this.editor.getMarkdown()
+                const zhanshi = this.editor.getMarkdown()
+
+                window.editormd.markdownToHTML("view", {
+                    markdown        : zhanshi ,//+ "\r\n" + $("#append-test").text(),
+                    //htmlDecode      : true,       // 开启 HTML 标签解析，为了安全性，默认不开启
+                    htmlDecode      : "style,script,iframe",  // you can filter tags decode
+                    //toc             : false,
+                    tocm            : true,    // Using [TOCM]
+                    //tocContainer    : "#custom-toc-container", // 自定义 ToC 容器层
+                    //gfm             : false,
+                    //tocDropdown     : true,
+                    // markdownSourceCode : true, // 是否保留 Markdown 源码，即是否删除保存源码的 Textarea 标签
+                    emoji           : true,
+                    taskList        : true,
+                    tex             : true,  // 默认不解析
+                    flowChart       : true,  // 默认不解析
+                    sequenceDiagram : true,  // 默认不解析
+                });
+            },
             fetchScript: function (url) {
                 return new Promise((resolve) => {
                     scriptjs(url, () => {
@@ -44,7 +79,7 @@
                 })
             },
             getConfig: function () {
-                return { ...defaultConfig, ...this.config }
+                return {...defaultConfig, ...this.config}
             },
             getEditor: function () {
                 return this.editor
@@ -70,7 +105,7 @@
             setMarkdown: function (markdown) {
                 return this.editor.setMarkdown(markdown)
             },
-            init (id) {
+            init(id) {
                 let vm = this
                 /*let editor = vm.$store.state.editor
                 if (editor.goEdit) {
