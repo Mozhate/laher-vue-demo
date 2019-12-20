@@ -178,7 +178,7 @@
         }
 
         var pagination = function (data, type) {
-          console.log(data)
+          // console.log(data)
           var rowNumber = (type === "editormd-logo") ? "5" : 20;
           var pageTotal = Math.ceil(data.length / rowNumber);
           var table = "<div class=\"" + classPrefix + "grid-table\">";
