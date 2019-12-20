@@ -1,6 +1,6 @@
 <template>
   <div class="markdown-editor-box">
-    <link rel="stylesheet" href="/static/editor.md/css/editormd.min.css">
+    <link rel="stylesheet" href="static/editor.md/css/editormd.min.css">
     <div :id="editorId"></div>
   </div>
 </template>
@@ -100,8 +100,8 @@
                     config.markdown = markdown
                 }
                 (async () => {
-                    await vm.fetchScript('/static/editor.md/jquery.min.js')
-                    await vm.fetchScript('/static/editor.md/editormd.min.js')
+                    await vm.fetchScript('static/editor.md/jquery.min.js');
+                    await vm.fetchScript('static/editor.md/editormd.min.js');
                     vm.jsLoadOver = true
                     vm.editor = window.editormd(vm.editorId, config)
                     /*vm.$nextTick(() => {

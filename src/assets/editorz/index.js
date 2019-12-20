@@ -1,7 +1,7 @@
 const defaultConfig = {
   width: "100%",
   height: 600,
-  path: '/static/editor.md/lib/',
+  path: 'static/editor.md/lib/',
   // theme: 'dark',
   // previewTheme: 'dark',
   // editorTheme: 'pastel-on-dark',
