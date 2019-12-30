@@ -15,7 +15,7 @@ const actions = {
       // 存入本地缓存
       localStorage.setItem("permissionList", JSON.stringify(permissionList))
       // 存入vuex
-      commit('UPDATE_PERMISSION_LIST', permissionList)
+      commit('UPDATE_PERMISSION_LIST', JSON.stringify(permissionList))
     }).catch((e) => {
     });
   }

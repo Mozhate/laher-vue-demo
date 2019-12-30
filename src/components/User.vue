@@ -1,6 +1,7 @@
 <template>
   <div>
     <div>
+      <div @click="$router.push({path:'/'})">返回首页</div>
       <button v-permission="['User_Add']" @click="add">新增</button>
     </div>
     <div>

@@ -81,6 +81,10 @@ const router = new Router({
         permissions:['User_Add']
       }
     },
+    {
+      path: '/commPage',
+      component: () => import('@/components/CommPage'),
+    },
   ]
 });
 
