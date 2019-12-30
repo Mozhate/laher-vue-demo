@@ -5,6 +5,8 @@ import App from './App'
 import router from './router'
 import mavonEditor from 'mavon-editor'
 import 'mavon-editor/dist/css/index.css'
+import store from './store'
+import directivePermission from '@/directive/permission'
 
 Vue.config.productionTip = false
 
@@ -15,10 +17,13 @@ import MarkdownRun from 'vue-markdown-run';
 // 全局注入
 Vue.use(MarkdownRun);
 
+// 自定义指令
+Vue.directive('permission',directivePermission);
 
 new Vue({
   el: '#app',
   router,
+  store,
   components: { App },
   template: '<App/>'
 })
