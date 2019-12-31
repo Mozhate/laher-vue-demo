@@ -89,6 +89,10 @@ const router = new Router({
       path: '/lazyImg',
       component: () => import('@/components/LazyImg'),
     },
+    {
+      path: '/codetest',
+      component: () => import('@/components/codetest'),
+    },
   ]
 });
 
