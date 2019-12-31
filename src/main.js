@@ -7,11 +7,14 @@ import mavonEditor from 'mavon-editor'
 import 'mavon-editor/dist/css/index.css'
 import store from './store'
 import directivePermission from '@/directive/permission'
+import VueImgLazyLoad from 'vue-images-lazy-load';
 
-Vue.config.productionTip = false
+Vue.config.productionTip = false;
 
 /* eslint-disable no-new */
-Vue.use(mavonEditor)
+Vue.use(mavonEditor);
+
+Vue.use(VueImgLazyLoad);
 
 import MarkdownRun from 'vue-markdown-run';
 // 全局注入

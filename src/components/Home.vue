@@ -20,6 +20,7 @@
       <li v-permission="['VueEditor']"><router-link to="/vueEditor">VueEditor</router-link></li>
       <li v-permission="['Geopattern']"><router-link to="/geopattern">Geopattern</router-link></li>
       <li><router-link to="/commPage">公共页面（不要权限）</router-link></li>
+      <li><router-link to="/lazyImg">懒加载图片</router-link></li>
     </ul>
   </div>
 </template>

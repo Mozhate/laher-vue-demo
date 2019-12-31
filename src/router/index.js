@@ -85,6 +85,10 @@ const router = new Router({
       path: '/commPage',
       component: () => import('@/components/CommPage'),
     },
+    {
+      path: '/lazyImg',
+      component: () => import('@/components/LazyImg'),
+    },
   ]
 });
 
