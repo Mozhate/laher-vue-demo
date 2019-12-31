@@ -8,6 +8,7 @@
       <span @click="switchPermission('admin')">admin</span>
       <span @click="switchPermission('query')">query</span>
       <span @click="switchPermission('user')">user</span>
+      <p @click="clearPermission()">清理权限</p>
     </div>
     <ul>
       <li v-permission="['User']"><router-link to="/user">User权限</router-link></li>
@@ -37,7 +38,12 @@
     },
     methods:{
       switchPermission(perm){
-        this.$store.dispatch('updatePermissionList', this.perMap[perm])
+        this.$store.dispatch('updatePermissionList', this.perMap[perm]);
+        // 因为菜单栏直接删除dom节点，所以要刷新才能出现
+        location.reload()
+      },
+      clearPermission(){
+          localStorage.removeItem('permissionList');
           location.reload()
       }
     }
