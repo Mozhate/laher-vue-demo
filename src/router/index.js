@@ -93,6 +93,10 @@ const router = new Router({
       path: '/codetest',
       component: () => import('@/components/codetest'),
     },
+    {
+      path: '/particles',
+      component: () => import('@/components/Particles'),
+    },
   ]
 });
 

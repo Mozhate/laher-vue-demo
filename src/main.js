@@ -9,6 +9,9 @@ import store from './store'
 import directivePermission from '@/directive/permission'
 import VueImgLazyLoad from 'vue-images-lazy-load';
 
+import VueParticles from 'vue-particles'
+Vue.use(VueParticles)
+
 Vue.config.productionTip = false;
 
 /* eslint-disable no-new */

@@ -22,6 +22,7 @@
       <li><router-link to="/commPage">公共页面（不要权限）</router-link></li>
       <li><router-link to="/lazyImg">懒加载图片</router-link></li>
       <li><router-link to="/codetest">生成验证码</router-link></li>
+      <li><router-link to="/particles">粒子背景</router-link></li>
     </ul>
   </div>
 </template>
