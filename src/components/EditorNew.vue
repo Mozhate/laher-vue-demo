@@ -7,6 +7,7 @@
     <div :id="editorId"></div>
 
     <div style="background: #8f9d6a">内容：{{content}}</div>
+    <textarea>{{content}}</textarea>
 
     <div id="view">
 

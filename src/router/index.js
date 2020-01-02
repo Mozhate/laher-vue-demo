@@ -97,6 +97,10 @@ const router = new Router({
       path: '/particles',
       component: () => import('@/components/Particles'),
     },
+    {
+      path: '/codeDiff',
+      component: () => import('@/components/CodeDiff'),
+    },
   ]
 });
 
