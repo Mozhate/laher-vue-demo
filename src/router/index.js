@@ -101,6 +101,10 @@ const router = new Router({
       path: '/codeDiff',
       component: () => import('@/components/CodeDiff'),
     },
+    {
+      path: '/ribbonEffect',
+      component: () => import('@/components/RibbonEffect'),
+    },
   ]
 });
 

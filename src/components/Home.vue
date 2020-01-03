@@ -24,6 +24,7 @@
       <li><router-link to="/codetest">生成验证码</router-link></li>
       <li><router-link to="/particles">粒子背景</router-link></li>
       <li><router-link to="/codeDiff">对比文件</router-link></li>
+      <li><router-link to="/ribbonEffect">背景丝带</router-link></li>
     </ul>
   </div>
 </template>
