@@ -105,6 +105,18 @@ const router = new Router({
       path: '/ribbonEffect',
       component: () => import('@/components/RibbonEffect'),
     },
+    {
+      path: '/shardGlass',
+      component: () => import('@/components/ShardGlass'),
+    },
+    {
+      path: '/todoList',
+      component: () => import('@/components/TodoList'),
+    },
+    {
+      path: '/notification',
+      component: () => import('@/components/Notification'),
+    },
   ]
 });
 

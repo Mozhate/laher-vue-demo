@@ -25,6 +25,9 @@
       <li><router-link to="/particles">粒子背景</router-link></li>
       <li><router-link to="/codeDiff">对比文件</router-link></li>
       <li><router-link to="/ribbonEffect">背景丝带</router-link></li>
+      <li><router-link to="/shardGlass">玻璃破碎</router-link></li>
+      <li><router-link to="/todoList">工作簿</router-link></li>
+      <li><router-link to="/notification">通知消息</router-link></li>
     </ul>
   </div>
 </template>
