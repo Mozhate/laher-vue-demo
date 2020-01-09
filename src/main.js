@@ -20,7 +20,7 @@ Vue.use(mavonEditor);
 Vue.use(VueImgLazyLoad);
 
 // dev使用moke
-process.env.MOCK && require('@/mock')
+// process.env.MOCK && require('@/mock')
 
 import MarkdownRun from 'vue-markdown-run';
 // 全局注入
