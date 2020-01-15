@@ -118,6 +118,10 @@ const router = new Router({
       path: '/notification',
       component: () => import('@/components/Notification'),
     },
+    {
+      path: '/color',
+      component: () => import('@/components/Color'),
+    },
   ]
 });
 

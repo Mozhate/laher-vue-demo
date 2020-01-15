@@ -28,6 +28,7 @@
       <li><router-link to="/shardGlass">玻璃破碎</router-link></li>
       <li><router-link to="/todoList">工作簿</router-link></li>
       <li><router-link to="/notification">通知消息</router-link></li>
+      <li><router-link to="/color">样式表达</router-link></li>
     </ul>
   </div>
 </template>

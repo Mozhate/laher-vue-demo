@@ -1,14 +1,21 @@
 <template>
   <div>
-    <canvas id="notHomeTopCanvas"></canvas>
+    <div @click="$router.push({path:'/'})">返回首页</div>
+    <canvas ref="myCanvas" id="notHomeTopCanvas" width="900" height="600"></canvas>
   </div>
 </template>
 
 <script>
+    import TweenLite from 'gsap'
+
     export default {
         name: "ShardGlass",
-        created() {
-            // var mouseX = mouseY = mouseOldX = mouseOldY = 0,
+        data(){
+            return{
+            }
+        },
+        // 一定要放在挂载里面
+        mounted() {
             const jsonstr = {
                 "triW": 14,
                 "triH": 20,
@@ -19,30 +26,26 @@
                 "trailMaxLength": 30,
                 "trailIntervalCreation": 100,
                 "delayBeforeDisappear": 2,
-                "colors": ["#96EDA6", "#5BC6A9", "#38668C", "#374D84", "#BED5CB", "#62ADC6", "#8EE5DE", "#304E7B"]
+                "colors": ["#96EDA6", "#5BC6A9", "#38668C", "#374D84", "#BED5CB", "#62ADC6", "#8EE5DE", "#304E7B"],
             };
             window.cnblogsConfig = {
                 essayTopAnimation: jsonstr
             }
-            var
-                C, c, viewWidth, viewHeight,
-                triW = window.cnblogsConfig.essayTopAnimation.triW,
-                triH = window.cnblogsConfig.essayTopAnimation.triH,
-                neighbours = window.cnblogsConfig.essayTopAnimation.neighbours,
-                speedTrailAppear = window.cnblogsConfig.essayTopAnimation.speedTrailAppear,
-                speedTrailDisappear = window.cnblogsConfig.essayTopAnimation.speedTrailDisappear,
-                speedTriOpen = window.cnblogsConfig.essayTopAnimation.speedTriOpen,
-                trailMaxLength = window.cnblogsConfig.essayTopAnimation.trailMaxLength,
-                trailIntervalCreation = window.cnblogsConfig.essayTopAnimation.trailIntervalCreation,
-                delayBeforeDisappear = window.cnblogsConfig.essayTopAnimation.delayBeforeDisappear,
-                cols, rows,
-                tris,
-                randomAlpha = true,
+            let C, c, viewWidth, viewHeight, rectCanvas,
+                triW = 14,
+                triH = 20,
+                neighbours = ["side", "top", "bottom"],
+                speedTrailAppear = 0.1,
+                speedTrailDisappear = 0.1,
+                speedTriOpen = 1,
+                trailMaxLength = 30,
+                trailIntervalCreation = 100,
+                delayBeforeDisappear = 2,
+                cols, rows, tris, randomAlpha = true,
+                colors = ["#96EDA6", "#5BC6A9", "#38668C", "#374D84", "#BED5CB", "#62ADC6", "#8EE5DE", "#304E7B"];
 
-                colors = window.cnblogsConfig.essayTopAnimation.colors;
-
-            var Triangle = function (pos, column, row) {
-                var thisTri = this;
+            let Triangle = function (pos, column, row) {
+                let thisTri = this;
                 this.selectedForTrail = false;
                 this.pos = pos;
                 this.col = column;
@@ -111,7 +114,7 @@
                             this.y2 = this.tY2;
                             this.y3 = (this.tY1 + this.tY2) / 2;
                         }
-                        this.tweenOpen = TweenMax.to(this, this.tSpeed, {
+                        this.tweenOpen = TweenLite.to(this, this.tSpeed, {
                             x1: this.tX1,
                             x2: this.tX2,
                             x3: this.tX3,
@@ -119,7 +122,7 @@
                             y2: this.tY2,
                             y3: this.tY3,
                             alpha: this.tAlpha,
-                            ease: Strong.easeInOut,
+                            // ease: Strong.easeInOut,
                             delay: this.delay,
                             onComplete: openComplete,
                             onCompleteParams: [thisTri]
@@ -134,7 +137,7 @@
                     this.tSpeed = targetSpeed || .8;
                     this.opened = false;
                     this.closing = true;
-                    var closeX1, closeX2, closeX3, closeY1, closeY2, closeY3;
+                    let closeX1, closeX2, closeX3, closeY1, closeY2, closeY3;
 
                     if (this.direction == "side") {
                         closeX1 = closeX2 = closeX3 = this.tX1;
@@ -157,7 +160,7 @@
                         closeY3 = (this.tY1 + this.tY2) / 2;
                     }
                     if (this.tweenClose) this.tweenClose.kill();
-                    this.tweenClose = TweenMax.to(this, this.tSpeed, {
+                    this.tweenClose = TweenLite.to(this, this.tSpeed, {
                         x1: closeX1,
                         x2: closeX2,
                         x3: closeX3,
@@ -165,12 +168,11 @@
                         y2: closeY2,
                         y3: closeY3,
                         alpha: 0,
-                        ease: Strong.easeInOut,
+                        // ease: Strong.easeInOut,
                         delay: this.delay,
                         onComplete: closeComplete,
                         onCompleteParams: [thisTri]
                     });
-                    // }
                 }
             }
 
@@ -186,72 +188,18 @@
                 tri.closing = false;
             }
 
-            /*
-             function handleMouseMove(e){
-             mouseX = event.clientX - rectCanvas.left;
-             mouseY = event.clientY - rectCanvas.top;
-             mouseSpeedX = mouseX - mouseOldX;
-             mouseSpeedY = mouseY - mouseOldY;
-             if (Math.abs(mouseSpeedX)>Math.abs(mouseSpeedY)){
-             mouseDirection = "h";
-             }else{
-             mouseDirection = "v";
-             }
-             mouseOldX = mouseX;
-             mouseOldY = mouseY;
-
-             var tcol = Math.floor(mouseX/triW);
-             var trow = Math.floor((mouseY-triH/4)/(triH/2));
-             var trianglePos = tcol + (trow*cols);
-             var ts = tris[trianglePos];
-             var openDirection;
-
-             for (var i=0;i<tris.length;i++){
-             var tt = tris[i];
-             if (tt == ts){
-             if (mouseDirection == "v"){
-             if (mouseSpeedY>0){
-             openDirection = "bottom";
-             }else{
-             openDirection  = "top";
-             }
-
-             }else { // mouse direction horizontal
-             if (mouseSpeedX>0){
-             if (tt.isLeft){
-             openDirection = "bottom";
-             }else{
-             openDirection = "side";
-             }
-             }else{
-             if (tt.isLeft){
-             openDirection = "side";
-             }else{
-             openDirection = "bottom";
-             }
-             }
-             }
-             tt.open(openDirection, .5, 1, 0);
-             }else{
-             tt.close();
-             }
-             }
-             draw();
-             }
-             */
-
             function unselectTris() {
-                for (var i = 0; i < tris.length; i++) {
+                for (let i = 0; i < tris.length; i++) {
                     tris[i].selectedForTrail = false;
                 }
             }
 
             function createTrail() {
                 unselectTris();
-                var currentTri;
-                var trailLength = Math.floor(Math.random() * trailMaxLength - 2) + 2;
-                var index = Math.round(Math.random() * tris.length);
-                startTri = tris[index];
+                let currentTri;
+                let trailLength = Math.floor(Math.random() * trailMaxLength - 2) + 2;
+                let index = Math.round(Math.random() * tris.length);
+                let startTri = tris[index];
                 if (typeof (startTri) != "undefined" && typeof (startTri.selectedForTrail) != "undefined") {
                     startTri.selectedForTrail = true;
                 } else {
@@ -263,11 +211,11 @@
                     closeDir: "side"
                 };
 
-                for (var i = 0; i < trailLength; i++) {
-                    var o = getNeighbour(currentTri.tri);
+                for (let i = 0; i < trailLength; i++) {
+                    let o = getNeighbour(currentTri.tri);
+                    let opacity;
                     if (o != null) {
                         o.tri.selectedForTrail = true;
-                        var opacity;
                         if (randomAlpha) {
                             opacity = (Math.random() < .8) ? Math.random() * .5 : 1;
                         } else {
@@ -287,7 +235,7 @@
 
             function getNeighbour(t) {
                 shuffleArray(neighbours);
-                for (var i = 0; i < neighbours.length; i++) {
+                for (let i = 0; i < neighbours.length; i++) {
                     if (neighbours[i] == "top") {
                         if (t.row != 0 && !tris[t.pos - cols].selectedForTrail && !tris[t.pos - cols].opened) {
                             return {
@@ -326,7 +274,7 @@
 
             function draw() {
                 c.clearRect(0, 0, C.width, C.height);
-                for (var i = 0; i < tris.length; i++) {
+                for (let i = 0; i < tris.length; i++) {
                     tris[i].draw();
                 }
             }
@@ -339,7 +287,7 @@
             }
 
             function hexToRgb(hex) {
-                var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+                let result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
                 return result ? {
                     r: parseInt(result[1], 16),
                     g: parseInt(result[2], 16),
@@ -348,22 +296,18 @@
             }
 
             function shuffleArray(o) {
-                for (var j, x, i = o.length; i; j = Math.floor(Math.random() * i), x = o[--i], o[i] = o[j], o[j] = x) ;
+                for (let j, x, i = o.length; i; j = Math.floor(Math.random() * i), x = o[--i], o[i] = o[j], o[j] = x) ;
                 return o;
             }
 
-            function initCanvas(canvasId) {
-                var C = document.getElementById(canvasId)
-                var c = C.getContext('2d')
-                var viewWidth = C.width = C.scrollWidth
-                var viewHeight = C.height = C.scrollHeight
-                initParams();
-                //document.onmousemove = handleMouseMove;
-                window.addEventListener("resize", handleResize);
-                TweenLite.ticker.addEventListener("tick", draw);
-                handleResize();
-            }
-
+            C = this.$refs.myCanvas
+            c = C.getContext('2d')
+            viewWidth = C.width = C.scrollWidth
+            viewHeight = C.height = C.scrollHeight
+            initParams();
+            window.addEventListener("resize", handleResize);
+            TweenLite.ticker.add(draw)
+            handleResize();
 
             function initParams() {
                 cols = Math.floor(viewWidth / triW);
@@ -373,17 +317,17 @@
             }
 
             function initGrid() {
-                for (var j = 0; j < rows; j++) {
-                    for (var i = 0; i < cols; i++) {
-                        var pos = i + (j * cols);
-                        var triangle = new Triangle(pos, i, j);
+                for (let j = 0; j < rows; j++) {
+                    for (let i = 0; i < cols; i++) {
+                        let pos = i + (j * cols);
+                        let triangle = new Triangle(pos, i, j);
                         tris.push(triangle);
                         triangle.draw();
                     }
                 }
             }
 
-            var interval;
+            let interval;
 
             function start() {
                 if (interval) clearInterval(interval);
@@ -392,35 +336,6 @@
                 interval = setInterval(createTrail, trailIntervalCreation);
                 createTrail();
             }
-
-            function pause() {
-                if (interval) clearInterval(interval);
-                for (var i = 0; i < tris.length; i++) {
-                    if (tris[i].tweenClose) tris[i].tweenClose.kill();
-                }
-            }
-
-            function closeAll() {
-                var count = 0;
-                if (interval) clearInterval(interval);
-                for (var i = 0; i < tris.length; i++) {
-                    if (tris[i].tweenOpen) tris[i].tweenOpen.kill();
-                    if (tris[i].opened || tris[i].opening) {
-                        count++;
-                        tris[i].close("top", .8, .2 + .0015 * count);
-                    }
-                }
-            }
-
-            function kill() {
-                if (interval) clearInterval(interval);
-                for (var i = 0; i < tris.length; i++) {
-                    TweenLite.killTweensOf(tris[i]);
-                    tris[i].alpha = 0;
-                }
-            }
-
-            initCanvas('notHomeTopCanvas');
         }
     }
 </script>
