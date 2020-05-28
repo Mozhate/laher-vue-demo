@@ -13,7 +13,7 @@
     "axios": "^0.19.1",
     "element-ui": "^2.13.0",
     "geopattern": "^1.2.3",
-    "gsap": "^3.0.5",
+    "gsap": "^3.2.6",
     "mavon-editor": "^2.7.7",
     "mockjs": "^1.1.0",
     "notification-koro1": "^1.1.1",
