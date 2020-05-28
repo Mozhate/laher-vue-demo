@@ -1,6 +1,9 @@
 <template>
   <div class="m-banner">1
-    <div :style="{ backgroundImage: 'url(' + this.pattern + ')' }"></div>
+
+    <div :style="{ backgroundImage: 'url(' + this.pattern + ')' ,width: '350px',height: '150px'}"></div>
+    <div :style="{ backgroundImage: 'url(' + this.pattern + ')' ,width: '1800px',height: '500px'}"></div>
+    {{this.pattern}}
   </div>
 </template>
 <script>
@@ -12,8 +15,8 @@
         },
         created() {
             let pattern = Trianglify({
-                width: 1500,
-                height: 300
+                width: 1800,
+                height: 500
             }).png();
             this.pattern = pattern
         }

@@ -1,7 +1,7 @@
 <template>
   <div class="markdown-editor-box">
-    <link rel="stylesheet" href="static/editor.md/css/editormd.min.css">
-    <link rel="stylesheet" href="static/editor.md/css/editormd.preview.css">
+    <link rel="stylesheet" href="/static/editor.md/css/editormd.min.css">
+    <link rel="stylesheet" href="/static/editor.md/css/editormd.preview.css">
     <button @click="htmlInfo()">html信息</button>
     <button @click="textInfo()">文本信息</button>
     <div :id="editorId"></div>
