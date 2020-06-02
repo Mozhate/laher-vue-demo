@@ -13,8 +13,8 @@
     export default {
         data() {
             return {
-              height:100,
-              width:250,
+              height:400,
+              width:1800,
               pattern: '',
               pattern2: '',
             }
