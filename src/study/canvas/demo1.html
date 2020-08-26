@@ -1,0 +1,110 @@
+<!doctype html>
+<head>
+    <style type="text/css">
+        canvas {
+            border: dashed 2px #CCC
+        }
+    </style>
+    <title>canvas</title>
+</head>
+
+<canvas id="demo1" width="300" height="300">默认width300px height150px</canvas>
+
+<script type="text/javascript">
+    runDemo5 = () => {
+        let demo1 = document.getElementById('demo1')
+        if (demo1.getContext) {
+            // 绘制圆弧的两种方式
+            // 二：arcTo(x, y, r, startAngle, endAngle, anticlockwise)
+            //参数1、2：控制点1坐标   参数3、4：控制点2坐标  参数4：圆弧半径
+            let ctx = demo1.getContext('2d')
+            ctx.beginPath()
+            ctx.moveTo(50, 50);
+            ctx.arcTo(200, 50, 200, 200, 100);
+            ctx.lineTo(200, 200)
+            ctx.stroke();
+        }
+    }
+    runDemo4 = () => {
+        let demo1 = document.getElementById('demo1')
+        if (demo1.getContext) {
+            let ctx = demo1.getContext('2d')
+            ctx.beginPath()
+            // 绘制圆弧的两种方式
+            // 一：arc(x, y, r, startAngle, endAngle, anticlockwise)
+            // 以(x, y)坐标为圆心，r为半径
+            // 从startAngle 弧度开始到endAngle弧度结束https://www.w3school.com.cn/i/arc.gif
+            // anticlosewise 是布尔值，true 表示逆时针，false 表示顺时针(默认是顺时针)。
+            // ctx.moveTo(100,100)
+            ctx.arc(10, 10, 50, 0, Math.PI / 2, false);
+            ctx.stroke()
+
+            ctx.beginPath()
+            ctx.arc(200, 200, 80, Math.PI, Math.PI * 1.5, true);
+            ctx.fill()
+
+            ctx.beginPath()
+            ctx.arc(150, 150, 80, Math.PI, Math.PI * 1.5)
+            ctx.fill()
+        }
+    }
+    runDemo3 = () => {
+        let demo1 = document.getElementById('demo1')
+        if (demo1.getContext) {
+            let ctx = demo1.getContext('2d')
+            // 图形基本元素是路径
+            // 创建一条路径
+            ctx.beginPath();
+            // 移动画笔到指定坐标，设置起点坐标（左上角的 x 坐标,左上角的 y 坐标）
+            ctx.moveTo(50, 50);
+            // 绘制从当前位置到指定坐标（200，50）的直线
+            ctx.lineTo(200, 50);
+            // 绘制从当前位置到指定坐标（200，200）的直线
+            ctx.lineTo(200, 200)
+            // 闭合路径可以将起始和结束进行连接，不用连接
+            // ctx.lineTo(50, 50);
+            // 所以结果任然是个三角形
+            // ctx.closePath()
+            // 填充闭合区域，如果path没有闭合则会自动闭合
+            ctx.fill()
+            // 绘制
+            ctx.stroke()
+        }
+    }
+
+    runDemo2 = () => {
+        let demo1 = document.getElementById('demo1')
+        if (demo1.getContext) {
+            let ctx = demo1.getContext('2d')
+            // 绘制矩形的三种方式
+            // 一：fillRect(左上角的 x 坐标,左上角的 y 坐标,width px,height px)
+            ctx.fillRect(10, 10, 55, 50)
+            // 二：strokeRect(左上角的 x 坐标,左上角的 y 坐标,width px,height px)
+            ctx.strokeRect(10, 70, 55, 50)
+            // 三：clearRect(左上角的 x 坐标,左上角的 y 坐标,width px,height px)
+            ctx.clearRect(20, 20, 20, 20)
+        }
+    }
+    runDemo1 = () => {
+        let demo1 = document.getElementById('demo1')
+        if (demo1.getContext) {
+            let ctx = demo1.getContext('2d')
+            // 绘制背景
+            ctx.fillStyle = "blue" // rgb(200,0,0)
+            // 绘制矩形(左上角的 x 坐标,左上角的 y 坐标,width px,height px)
+            ctx.fillRect(10, 10, 55, 50)
+
+            // 再次绘制
+            ctx.fillStyle = 'rgba(0,0,200,.5)'
+            // 再次绘制矩形
+            ctx.fillRect(30, 30, 55, 50)
+            // canvas 只支持原生图形绘制：矩形
+            // 其他图形需要生成路径path，使得复杂图形成为可能
+        }
+    }
+    // runDemo1()
+    // runDemo2()
+    // runDemo3()
+    // runDemo4()
+    runDemo5()
+</script>

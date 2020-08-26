@@ -22,7 +22,7 @@
       }
     },
     created(){
-      const pattern = GeoPattern.generate('spring boot');
+      const pattern = GeoPattern.generate('ia');
       this.css = pattern.toDataUrl()
       this.data = pattern.toDataUri()
       console.log(pattern.toBase64())
