@@ -1,5 +1,6 @@
 <!doctype html>
 <head>
+    <meta charset="utf-8"/>
     <style type="text/css">
         canvas {
             border: dashed 2px #CCC
@@ -11,17 +12,285 @@
 <canvas id="demo1" width="300" height="300">默认width300px height150px</canvas>
 
 <script type="text/javascript">
+    runDemo18 = () => {
+        let demo1 = document.getElementById('demo1')
+        if (demo1.getContext) {
+            let ctx = demo1.getContext('2d');
+
+            // a (m11):水平缩放。 b (m12):水平倾斜。 c (m21):垂直倾斜。 d (m22):垂直缩放。 e (dx):水平移动。 f (dy):垂直移动。
+            ctx.transform(1, 1, 0, 1, 0, 0);
+            ctx.fillRect(0, 0, 100, 100);
+        }
+    }
+    runDemo17 = () => {
+        let demo1 = document.getElementById('demo1')
+        if (demo1.getContext) {
+            let ctx = demo1.getContext('2d');
+
+            ctx.save()
+            ctx.fillStyle = 'red'
+            ctx.fillRect(0, 0, 30, 30)
+
+            ctx.restore()
+            ctx.translate(100, 100)
+            ctx.fillStyle = "blue"
+            // 顺时针旋转 π/180 = 1度 1度*45 = 45度
+            ctx.rotate(Math.PI / 180 * 45);
+            // 增减图形在 canvas 中的像素数目，当前放大倍数(2倍,1.5倍)
+            ctx.scale(2, 1.5)
+            ctx.fillRect(0, 0, 40, 40)
+        }
+    }
+    runDemo16 = () => {
+        let demo1 = document.getElementById('demo1')
+        if (demo1.getContext) {
+            let ctx = demo1.getContext('2d');
+
+            // 保存当前状态
+            ctx.save()
+            // 定位
+            ctx.translate(20, 20)
+            // 渲染实体
+            ctx.strokeRect(0, 0, 50, 50)
+            // 回滚上次保存
+            ctx.restore()
+            // 定位
+            ctx.translate(100, 100)
+            // 渲染空心
+            ctx.fillRect(0, 0, 100, 100)
+        }
+    }
+    runDemo15 = () => {
+        let demo1 = document.getElementById('demo1')
+        if (demo1.getContext) {
+            let ctx = demo1.getContext('2d');
+
+            ctx.fillRect(0, 0, 150, 150);   // 使用默认设置绘制一个矩形
+            ctx.save();                  // 保存默认状态
+
+            ctx.fillStyle = 'red'       // 在原有配置基础上对颜色做改变
+            ctx.fillRect(15, 15, 120, 120); // 使用新的设置绘制一个矩形
+            ctx.save();                  // 保存当前状态
+
+            ctx.fillStyle = '#FFF'       // 再次改变颜色配置
+            ctx.fillRect(30, 30, 90, 90);   // 使用新的配置绘制一个矩形
+
+            ctx.restore();               // 重新加载之前的颜色状态
+            ctx.fillRect(45, 45, 60, 60);   // 使用上一次的配置绘制一个矩形
+
+            ctx.restore();               // 加载默认颜色配置
+            ctx.fillRect(60, 60, 30, 30);   // 使用加载的配置绘制一个矩形
+        }
+    }
+    runDemo14 = () => {
+        let demo1 = document.getElementById('demo1')
+        if (demo1.getContext) {
+            let ctx = demo1.getContext('2d');
+
+            // 创建img元素
+            let img = new Image()
+            img.src = './tmp.png'
+
+            // 图片从网络加载，需要加载完成在渲染
+            img.onload = function () {
+                // 绘制img图片(图片,x,y,缩放宽度x,缩放高度y)
+                // ctx.drawImage(img, 0, 0, 300, 250)
+
+                // 切片 前4个定义原始图片位置和大小，最后4个定义目标位置和大小
+                ctx.drawImage(img, 0, 0, 300, 250, 50, 50, 250, 200)
+            }
+        }
+    }
+    runDemo13 = () => {
+        let demo1 = document.getElementById('demo1')
+        if (demo1.getContext) {
+            let ctx = demo1.getContext('2d');
+            // fillText(text, x, y [, maxWidth]) 在指定的 (x,y) 位置填充指定的文本，绘制的最大宽度是可选的。
+            // strokeText(text, x, y [, maxWidth]) 在指定的 (x,y) 位置绘制文本边框，绘制的最大宽度是可选的。
+
+            // ont = value 当前我们用来绘制文本的样式。这个字符串使用和 CSS font 属性相同的语法。 默认的字体是 10px sans-serif。
+            // textAlign = value 文本对齐选项。 可选的值包括：start, end, left, right or center。 默认值是 start。
+            // textBaseline = value 基线对齐选项，可选的值包括：top, hanging, middle, alphabetic, ideographic, bottom。默认值是 alphabetic。。
+            // direction = value 文本方向。可能的值包括：ltr, rtl, inherit。默认值是 inherit。
+            ctx.font = "50px 宋体"
+            ctx.fillText("天若有情", 10, 100);
+            ctx.strokeText("天若有情", 10, 200)
+        }
+    }
+    runDemo12 = () => {
+        let demo1 = document.getElementById('demo1')
+        if (demo1.getContext) {
+            let ctx = demo1.getContext('2d');
+
+            // 用 setLineDash 方法和 lineDashOffset 属性来制定虚线样式
+            // setLineDash 方法接受一个数组，来指定线段与间隙的交替
+            // lineDashOffset属性设置起始偏移量
+            ctx.setLineDash([38, 10]); // [实线长度, 间隙长度]
+            ctx.lineDashOffset = -0;
+            ctx.strokeRect(50, 50, 110, 210);
+        }
+    }
+    runDemo11 = () => {
+        let demo1 = document.getElementById('demo1')
+        if (demo1.getContext) {
+            let ctx = demo1.getContext('2d');
+            // round 通过填充一个额外的，圆心在相连部分末端的扇形，绘制拐角的形状。 圆角的半径是线段的宽度。
+            // bevel 在相连部分的末端填充一个额外的以三角形为底的区域， 每个部分都有各自独立的矩形拐角。
+            // miter(默认) 通过延伸相连部分的外边缘，使其相交于一点，形成一个额外的菱形区域。
+
+            let lineJoin = ['round', 'bevel', 'miter'];
+            ctx.lineWidth = 20;
+
+            for (let i = 0; i < lineJoin.length; i++) {
+                ctx.lineJoin = lineJoin[i];
+                ctx.beginPath();
+                ctx.moveTo(50, 50 + i * 50);
+                ctx.lineTo(100, 100 + i * 50);
+                ctx.lineTo(150, 50 + i * 50);
+                ctx.lineTo(200, 100 + i * 50);
+                ctx.lineTo(250, 50 + i * 50);
+                ctx.stroke();
+            }
+        }
+    }
+    runDemo10 = () => {
+        let demo1 = document.getElementById('demo1')
+        if (demo1.getContext) {
+            let ctx = demo1.getContext('2d');
+            // 线条末端样式
+            // 1 butt：线段末端以方形结束
+            // 2 round：线段末端以圆形结束
+            // 3 square：线段末端以方形结束，但是增加了一个宽度和线段相同，高度是线段厚度一半的矩形区域。
+            let lineCaps = ["butt", "round", "square"];
+
+            for (let i = 0; i < 3; i++) {
+                ctx.beginPath();
+                ctx.moveTo(20 + 30 * i, 30);
+                ctx.lineTo(20 + 30 * i, 100);
+                ctx.lineWidth = 20;
+                ctx.lineCap = lineCaps[i];
+                ctx.stroke();
+            }
+
+            ctx.beginPath();
+            ctx.moveTo(0, 30);
+            ctx.lineTo(300, 30);
+
+            ctx.moveTo(0, 100);
+            ctx.lineTo(300, 100)
+
+            ctx.strokeStyle = "red";
+            ctx.lineWidth = 1;
+            ctx.stroke();
+        }
+    }
+    runDemo9 = () => {
+        let demo1 = document.getElementById('demo1')
+        if (demo1.getContext) {
+            let ctx = demo1.getContext('2d');
+            ctx.beginPath()
+            // 创建起始
+            ctx.moveTo(50, 50)
+            // 创建横线
+            ctx.lineTo(200, 50)
+            // 横线宽度，单位：像素
+            ctx.lineWidth = 10
+            // 绘制
+            ctx.stroke()
+
+            ctx.beginPath()
+            ctx.moveTo(100, 100)
+            ctx.lineTo(150, 250)
+            ctx.lineWidth = 20
+            ctx.stroke()
+        }
+    }
+    runDemo8 = () => {
+        let demo1 = document.getElementById('demo1')
+        if (demo1.getContext) {
+            let ctx = demo1.getContext('2d');
+            for (let i = 0; i < 6; i++) {
+                for (let j = 0; j < 6; j++) {
+                    // 边框颜色
+                    ctx.strokeStyle = `rgb(${randomInt(0, 255)},${randomInt(0, 255)},${randomInt(0, 255)})`;
+                    // 透明度 1 ~ 0
+                    ctx.globalAlpha = .5
+                    // 填充边框矩形
+                    ctx.strokeRect(j * 50, i * 50, 40, 40);
+                }
+            }
+        }
+    }
+
+    randomInt = (from, to) => {
+        return parseInt(Math.random() * (to - from + 1) + from)
+    }
+
+    runDemo7 = () => {
+        let demo1 = document.getElementById('demo1')
+        if (demo1.getContext) {
+            let ctx = demo1.getContext('2d');
+            for (let i = 0; i < 6; i++) {
+                for (let j = 0; j < 6; j++) {
+                    // 填充颜色
+                    ctx.fillStyle = 'rgb(' + Math.floor(255 - 42.5 * i) + ',' +
+                        Math.floor(255 - 42.5 * j) + ',0)';
+                    // 填充矩形
+                    ctx.fillRect(j * 50, i * 50, 50, 50);
+                }
+            }
+        }
+    }
+
+    runDemo6 = () => {
+        let demo1 = document.getElementById('demo1')
+        if (demo1.getContext) {
+            let ctx = demo1.getContext('2d')
+            ctx.beginPath()
+            // 创建起始点
+            ctx.moveTo(10, 50)
+            // 绘制二次曲线
+            ctx.quadraticCurveTo(30, 60, 50, 10)
+            ctx.quadraticCurveTo(30, 30, 80, 50)
+            ctx.stroke()
+
+            ctx.beginPath()
+            ctx.moveTo(10, 200)
+            // 绘制贝塞尔曲线
+            ctx.bezierCurveTo(20, 100, 100, 120, 260, 260)
+            // 绘制
+            ctx.stroke()
+
+            // 瞄点
+            ctx.beginPath()
+            ctx.rect(10, 200, 10, 10)
+            ctx.rect(20, 100, 10, 10)
+            ctx.rect(100, 120, 10, 10)
+            ctx.rect(260, 260, 10, 10)
+            ctx.stroke()
+        }
+    }
     runDemo5 = () => {
         let demo1 = document.getElementById('demo1')
         if (demo1.getContext) {
-            // 绘制圆弧的两种方式
-            // 二：arcTo(x, y, r, startAngle, endAngle, anticlockwise)
-            //参数1、2：控制点1坐标   参数3、4：控制点2坐标  参数4：圆弧半径
             let ctx = demo1.getContext('2d')
             ctx.beginPath()
+            // 绘制圆弧的两种方式
+            // 二：arcTo(x, y, r, startAngle, endAngle, anticlockwise)
+            // 参数1、2：控制点1坐标   参数3、4：控制点2坐标  参数4：圆弧半径
             ctx.moveTo(50, 50);
+            //参数1、2：控制点1坐标   参数3、4：控制点2坐标  参数4：圆弧半径
             ctx.arcTo(200, 50, 200, 200, 100);
             ctx.lineTo(200, 200)
+            ctx.stroke();
+            // 第 1 条切线：起始点和控制点1决定的直线。
+            // 第 2 条切线：控制点1 和控制点2决定的直线。
+            // ​其实绘制的圆弧就是与这两条直线相切的圆弧。
+
+            ctx.beginPath();
+            ctx.rect(50, 50, 10, 10);
+            ctx.rect(200, 50, 10, 10)
+            ctx.rect(200, 200, 10, 10)
             ctx.stroke();
         }
     }
@@ -106,5 +375,18 @@
     // runDemo2()
     // runDemo3()
     // runDemo4()
-    runDemo5()
+    // runDemo5()
+    // runDemo6()
+    // runDemo7()
+    // runDemo8()
+    // runDemo9()
+    // runDemo10()
+    // runDemo11()
+    // runDemo12()
+    // runDemo13()
+    // runDemo14()
+    // runDemo15()
+    // runDemo16()
+    // runDemo17()
+    runDemo18()
 </script>
