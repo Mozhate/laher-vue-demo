@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>刮刮乐</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        #text {
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        #gg {
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+    </style>
+</head>
+<body>
+
+<div id="text">谢谢惠顾</div>
+<canvas id="gg" width="300" height="150">您的浏览器不支持Canvas</canvas>
+
+<script>
+    let gg = document.getElementById("gg")
+    if (gg.getContext) {
+        let ctx = gg.getContext('2d')
+
+        // 灰色矩形遮罩
+        ctx.fillStyle = '#ccc'
+        ctx.fillRect(0, 0, 300, 150)
+
+        // 显示老新未重叠部分
+        ctx.globalCompositeOperation = 'destination-out'
+
+        // open控制透明图画
+        let open = false;
+        gg.onmousedown = function () {
+            open = true;
+        }
+        gg.onmouseup = gg.onmouseleave = function () {
+            open = false;
+        }
+        gg.onmousemove = function (e) {
+            if (!open) {
+                return
+            }
+            // 当前xy-顶部距离xy 得到图画相对画板的位置
+            let parentNode = this.parentNode.parentNode
+            let x = e.clientX - parentNode.offsetLeft
+            let y = e.clientY - parentNode.offsetTop
+
+            // 画圆圈
+            ctx.beginPath()
+            ctx.arc(x, y, 20, 0, 2 * Math.PI)
+            ctx.fill()
+        }
+    }
+</script>
+
+</body>
+</html>

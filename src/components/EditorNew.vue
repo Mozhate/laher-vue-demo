@@ -53,6 +53,7 @@
             },
             textInfo() {
                 this.content = this.editor.getMarkdown()
+                // const zhanshi = this.editor.getMarkdown()
                 const zhanshi = this.editor.getMarkdown()
 
                 window.editormd.markdownToHTML("view", {
@@ -60,6 +61,8 @@
                     //htmlDecode      : true,       // 开启 HTML 标签解析，为了安全性，默认不开启
                     htmlDecode      : "style,script,iframe",  // you can filter tags decode
                     //toc             : false,
+
+                    path: 'static/editor.md/lib/',
                     tocm            : true,    // Using [TOCM]
                     //tocContainer    : "#custom-toc-container", // 自定义 ToC 容器层
                     //gfm             : false,

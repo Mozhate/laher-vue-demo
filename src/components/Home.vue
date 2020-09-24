@@ -15,6 +15,7 @@
       <li v-permission="['Trianglifyz']"><router-link to="/trianglifyz">Trianglifyz</router-link></li>
       <li v-permission="['Editorz']"><router-link to="/editorz">editor</router-link></li>
       <li v-permission="['EditorNew']"><router-link to="/editorNew">editorNew</router-link></li>
+      <li v-permission="['EditorResult']"><router-link to="/editorResult">editorResult</router-link></li>
       <li v-permission="['MavonEditor']"><router-link to="/mavonEditor">mavonEditor</router-link></li>
       <li v-permission="['VmMarkdown']"><router-link to="/vmMarkdown">vmMarkdown</router-link></li>
       <li v-permission="['VueEditor']"><router-link to="/vueEditor">VueEditor</router-link></li>
@@ -38,7 +39,7 @@
     data(){
       return {
         perMap:{
-          'admin': ['Trianglifyz', 'Editorz', 'EditorNew', 'MavonEditor', 'VmMarkdown', 'VueEditor', 'Geopattern'],
+          'admin': ['Trianglifyz', 'Editorz', 'EditorNew', 'EditorResult', 'MavonEditor', 'VmMarkdown', 'VueEditor', 'Geopattern'],
           'user':['User','User_Add','User_Upd','User_Del'],
           // 'query':['User','User_Del'],
           'query':['User'],

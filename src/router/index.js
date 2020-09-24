@@ -41,6 +41,13 @@ const router = new Router({
       }
     },
     {
+      path: '/editorResult',
+      component: () => import('@/components/EditorResult'),
+      meta:{
+        permissions:['EditorResult']
+      }
+    },
+    {
       path: '/mavonEditor',
       component: () => import('@/components/MavonEditor'),
       meta:{
